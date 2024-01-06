@@ -3,15 +3,21 @@
 // exit();
 
 include('functions.php');
+
+// データベース接続関数を呼び出し
 $pdo = connect_to_db();
 
+// POSTされたデータが存在しない、または空の場合はエラーを出力して処理を終了
 if (
   !isset($_POST['audioData']) || $_POST['audioData'] === ''
 ) {
   exit('ParamError');
 }
 
+ // POSTされた音声データ（base64エンコード）
 $encodedData=$_POST["audioData"];
+
+ // base64エンコードをデコード
 $decodeDate=base64_decode(preg_replace('#^data:audio/\w+;base64,#i', '', $encodedData));
 
 // 各種項目設定

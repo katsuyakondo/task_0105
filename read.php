@@ -2,7 +2,7 @@
 include('functions.php');
 $pdo = connect_to_db();
 
-$sql = 'SELECT * FROM voice_table'; // 必要に応じて 'SELECT id, content, created_at FROM voice_table' などとします
+$sql = 'SELECT * FROM voice_table'; 
 $stmt = $pdo->prepare($sql);
 
 try {
@@ -18,7 +18,7 @@ $output = "";
 foreach ($result as $record) {
   $output .= "
      <ul class='centered-list'>
-    <li class='flex-item'>
+      <li class='flex-item'>
        <p class='date-text'>" . htmlspecialchars($record['content'], ENT_QUOTES, 'UTF-8') . " - " . $record['updated_at'] . "</p>
        <audio controls class='audio-controls'>
          <source src='play_audio.php?id=" . $record['id'] . "' type='audio/wav'>
